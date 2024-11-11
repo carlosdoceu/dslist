@@ -21,21 +21,26 @@ public class Game {
     @Column(name = "game_year")
     private Integer year;
 
-    private String platform;
+    private String platforms;
+    private Double score;
     private String imgUrl;
 
+    @Column(columnDefinition = "TEXT")
     private String shortDescription;
 
+    @Column(columnDefinition = "TEXT")
     private String longDescription;
 
-    public Game(Long id, String title, String genre, Integer year, String platform, String imgUrl,
+    public Game(Long id, String title, Integer year, String genre, String platforms, Double score, String imgUrl,
             String shortDescription,
             String longDescription) {
         this.id = id;
         this.title = title;
-        this.genre = genre;
         this.year = year;
-        this.platform = platform;
+        this.genre = genre;
+
+        this.platforms = platforms;
+        this.score = score;
         this.imgUrl = imgUrl;
         this.shortDescription = shortDescription;
         this.longDescription = longDescription;
@@ -73,12 +78,12 @@ public class Game {
         this.year = year;
     }
 
-    public String getPlatform() {
-        return platform;
+    public String getPlatforms() {
+        return platforms;
     }
 
-    public void setPlatform(String platform) {
-        this.platform = platform;
+    public void setPlatforms(String platforms) {
+        this.platforms = platforms;
     }
 
     public String getShortDescription() {
@@ -113,7 +118,8 @@ public class Game {
         result = prime * result + ((title == null) ? 0 : title.hashCode());
         result = prime * result + ((genre == null) ? 0 : genre.hashCode());
         result = prime * result + ((year == null) ? 0 : year.hashCode());
-        result = prime * result + ((platform == null) ? 0 : platform.hashCode());
+        result = prime * result + ((platforms == null) ? 0 : platforms.hashCode());
+        result = prime * result + ((score == null) ? 0 : score.hashCode());
         result = prime * result + ((imgUrl == null) ? 0 : imgUrl.hashCode());
         result = prime * result + ((shortDescription == null) ? 0 : shortDescription.hashCode());
         result = prime * result + ((longDescription == null) ? 0 : longDescription.hashCode());
@@ -149,16 +155,24 @@ public class Game {
                 return false;
         } else if (!year.equals(other.year))
             return false;
-        if (platform == null) {
-            if (other.platform != null)
+        if (platforms == null) {
+            if (other.platforms != null)
                 return false;
-        } else if (!platform.equals(other.platform))
+        } else if (!platforms.equals(other.platforms))
             return false;
+
+            if (score == null) {
+                if (other.score != null)
+                    return false;
+            } else if (!score.equals(other.score))
+                return false;
+
         if (imgUrl == null) {
             if (other.imgUrl != null)
                 return false;
         } else if (!imgUrl.equals(other.imgUrl))
             return false;
+
         if (shortDescription == null) {
             if (other.shortDescription != null)
                 return false;
@@ -170,6 +184,14 @@ public class Game {
         } else if (!longDescription.equals(other.longDescription))
             return false;
         return true;
+    }
+
+    public Double getScore() {
+        return score;
+    }
+
+    public void setScore(Double score) {
+        this.score = score;
     }
 
 }
